@@ -1,0 +1,98 @@
+For this homework, firstly I wrote a C codes for asm files. After that I translate this into assembly code line by line.
+After that I wrote Shell.c code and I converted it to the MIPS by using godbolt. I added some syscall to the given output asm code.
+I added CREATE_PROCESS to the syscall.h
+I added CREATE_PROCESS case to the syscall.cpp and I back up the memory.
+In the last part, I will add my C code that I used for translate to asm
+
+
+---------------------- SHELL ASM PART -------------------
+I write a C code which is Shell.c. 
+I copied this to the godbolt online compiler.
+It gave me a MIPS code and I added some parts to this code
+In my actual C code, it includes printf,scanf etc. I removed this part and I added syscall for shell.asm
+Yusuf Sinan Hoca said we gave Shell.c part for the easy way to write assembly. So I wrote c code first which includes a menu, and I send to the godbolt compiler, after that I added
+some parts to this output code
+
+-----------------------SYSCALL.H-------------------------
+
+I added just one line this file. My syscall's name is CREATE_PROCESS
+
+----------------------SYSCALL.CPP------------------------
+
+Firstly, I misunderstood some part and I asked my Teaching Assistant İlhan Hoca and I got it.
+I used mem.cpp's variables for back up .
+I backup the register arrays, variables etc. Because we need to do context switch process.
+First I put the actual variables to the temporary variables.
+After that I called the functions which are initialize_world, initialize_run_stack, read_assembly_file and run_program. 
+Lastly, I put the temporary variables to the actual variables again.
+
+----------------------PROGRAM----------------------------
+
+You can run with this line : ./spim -file Shell.asm
+
+--------------------MY C CODES FOR THE ASSEMBLY FILES --------------
+
+--------------------1  :  ShowPrimes.asm 
+
+ int isPrime(int number){
+	int i;
+	if(number==2) return 1;
+	for(i = 2;i<number;++i){
+		if(number%i == 0) return 0;
+	}
+	return 1;
+}
+
+int main(){
+	int i;
+	printf("0\n");
+	printf("1\n");
+	for(i=2;i<=1000;++i){
+		printf("%d",i );
+		if(isPrime(i) == 1) printf(" Prime" );
+		printf("\n");
+	}
+
+	return 0;
+}
+
+
+
+----------------- 2 : Factorize.asm
+
+
+int main() {
+    int num, i;
+    printf("Enter a positive integer: ");
+    scanf("%d", &num);
+    printf("Factors of %d are: ", num);
+    for (i = 1; i <= num; ++i) {
+        if (num % i == 0) {
+            printf("%d ", i);
+        }
+    }
+    return 0;
+}
+
+
+-----------------3 : BubbleSort.asm
+
+int main()
+{
+    int* arr;
+    printf("lease enter the length of the list :");
+    scanf("%d",&size);
+    if(size < 0 ){
+      printf("The length of the list can not be negative or zero"); 
+      exit(0);
+    }
+    arr = (int*)malloc(size *sizeof(int))
+    for(int i = 0;i<size;++i){
+      printf("Enter a value : ");
+      scanf("%d",arr[i]);
+    }
+    bubbleSort(arr, size);
+    printf("After bubble sorting, the last list is: ");
+    printArray(arr, size);
+    return 0;
+}
