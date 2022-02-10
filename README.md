@@ -1,5 +1,5 @@
 # GTU CSE-312-Operating-Systems
-Gebze Technical University (GTU)
+Gebze Technical University (GTU)<br />
 GTU CSE312 Opearting Systems Course
 
 Operating Systems (C++ - ASSEMBLY Language) Assembly programs, Syscalls, Program Scheduling, Process Table, Multiple Programming, Interrupt Handling, Micro Kernel
